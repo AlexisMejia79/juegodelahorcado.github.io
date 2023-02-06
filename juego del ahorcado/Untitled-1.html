@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hangman Game</title>
+  </head>
+  <body>
+    <script>
+      // Define the word to be guessed
+      var word = "javascript";
+
+      // Create an array to display the word with underscores
+      var wordDisplay = [];
+      for (var i = 0; i < word.length; i++) {
+        wordDisplay[i] = "_";
+      }
+
+      // Keep track of incorrect guesses
+      var incorrectGuesses = [];
+
+      // Set the number of lives
+      var remainingLives = 6;
+
+      // Start the game loop
+      while (wordDisplay.join("") !== word && remainingLives > 0) {
+        // Ask the user for a guess
+        var letter = prompt("Guess a letter:");
+
+        // Check if the guess is correct
+        var correctGuess = false;
+        for (var i = 0; i < word.length; i++) {
+          if (word[i] === letter) {
+            wordDisplay[i] = letter;
+            correctGuess = true;
+          }
+        }
+
+        // If the guess is incorrect, add it to the list of incorrect guesses
+        if (!correctGuess) {
+          incorrectGuesses.push(letter);
+          remainingLives--;
+        }
+
+        // Display the word and incorrect guesses
+        document.write(wordDisplay.join(" ") + "<br>");
+        document.write("Incorrect guesses: " + incorrectGuesses.join(" ") + "<br>");
+      }
+
+      // Check if the player won or lost
+      if (wordDisplay.join("") === word) {
+        document.write("You win!");
+      } else {
+        document.write("You lose. The word was " + word + ".");
+      }
+    </script>
+  </body>
+</html>
